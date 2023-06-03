@@ -5,9 +5,6 @@ on:
       repo:
         required: true
         type: string
-      workflow_revision:
-        required: true
-        type: string
       dockerfile:
         required: false
         type: string
