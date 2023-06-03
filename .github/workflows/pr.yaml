@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: yo
+        run: ls -lah
 
       - id: composite
         uses: DamianBis/actions-demo-lib/.github/buildImage@main
