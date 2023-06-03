@@ -13,6 +13,12 @@ on:
         required: true
 
 jobs:
+  yamumma:
+    runs-on: ubuntu-latest
+    steps:    
+      - name: Build and push Docker image
+        run: echo ${{ github.sha }}
+
   do-build:
     permissions: write-all
     uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml@main
