@@ -21,9 +21,19 @@ jobs:
       - name: Build and push Docker image
         run: echo ${{ github.ref }}
 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - id: composite
+        uses: DamianBis/actions-demo-lib/.github/workflows/buildImageComposite.yaml@main
+        with: 
+          repo: ${{ inputs.repo }}
+          envPAT: ${{ secrets.envPAT }}
+
+
   do-build:
     permissions: write-all
-    uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml@${{ github.ref }}
+    uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml@main
     with:
       repo: ${{ inputs.repo }}
     secrets:
@@ -32,4 +42,4 @@ jobs:
   post-build-checks:
     needs: do-build
     permissions: write-all
-    uses: DamianBis/actions-demo-lib/.github/workflows/buildChecks.yaml@${{ github.ref }}
+    uses: DamianBis/actions-demo-lib/.github/workflows/buildChecks.yaml@main
