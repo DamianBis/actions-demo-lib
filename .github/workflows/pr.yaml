@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: composite
-        uses: DamianBis/actions-demo-lib/.github/workflows/buildImageComposite.yaml@main
+        uses: DamianBis/actions-demo-lib/buildImage@main
         with: 
           repo: ${{ inputs.repo }}
           envPAT: ${{ secrets.envPAT }}
