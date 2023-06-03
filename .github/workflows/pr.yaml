@@ -18,7 +18,7 @@ on:
 jobs:
   do-build:
     permissions: write-all
-    uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml@${{inputs.workflow_revision}}
+    uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml
     with:
       repo: ${{ inputs.repo }}
     secrets:
@@ -27,4 +27,4 @@ jobs:
   post-build-checks:
     needs: do-build
     permissions: write-all
-    uses: DamianBis/actions-demo-lib/.github/workflows/buildChecks.yaml@${{inputs.workflow_revision}}
+    uses: DamianBis/actions-demo-lib/.github/workflows/buildChecks.yaml
