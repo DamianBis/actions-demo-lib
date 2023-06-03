@@ -1,0 +1,23 @@
+name: Post Build Checks
+
+on: workflow_call
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "RUN SONARCLOUD"
+
+  plerion:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "RUN PLERION"
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "RUN UNIT TESTS"
