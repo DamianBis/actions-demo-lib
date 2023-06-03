@@ -21,24 +21,9 @@ jobs:
       - name: Build and push Docker image
         run: echo ${{ github.ref }}
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: yo
-        run: ls -lah
-
-      - id: composite
-        uses: DamianBis/actions-demo-lib/.github/buildImage@main
-        with: 
-          repo: ${{ inputs.repo }}
-          envPAT: ${{ secrets.envPAT }}
-
-
   do-build:
     permissions: write-all
-    uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml@main
+    uses: ./.github/workflows/buildImage.yaml
     with:
       repo: ${{ inputs.repo }}
     secrets:
