@@ -5,6 +5,9 @@ on:
       repo:
         required: true
         type: string
+      workflow_revision:
+        required: true
+        type: string
       dockerfile:
         required: false
         type: string
@@ -15,7 +18,7 @@ on:
 jobs:
   do-build:
     permissions: write-all
-    uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml@${{ github.sha }}
+    uses: DamianBis/actions-demo-lib/.github/workflows/buildImage.yaml@${{ inputs.workflow_revision }}
     with:
       repo: ${{ inputs.repo }}
     secrets:
@@ -24,4 +27,4 @@ jobs:
   post-build-checks:
     needs: do-build
     permissions: write-all
-    uses: DamianBis/actions-demo-lib/.github/workflows/buildChecks.yaml@${{ github.sha }}
+    uses: DamianBis/actions-demo-lib/.github/workflows/buildChecks.yaml@${{ inputs.workflow_revision }}
