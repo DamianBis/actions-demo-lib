@@ -29,6 +29,7 @@ jobs:
     
   deploy-uat:
     needs: post-build-checks
+    if: github.ref == 'refs/heads/main'
     permissions: write-all
     uses: ./.github/workflows/deployCdk.yaml
     with:
