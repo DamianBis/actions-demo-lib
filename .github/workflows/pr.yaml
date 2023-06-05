@@ -28,6 +28,7 @@ jobs:
     uses: ./.github/workflows/buildChecks.yaml
     
   deploy-uat:
+    needs: post-build-checks
     permissions: write-all
     uses: ./.github/workflows/deployCdk.yaml
     with:
