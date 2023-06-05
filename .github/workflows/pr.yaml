@@ -26,3 +26,9 @@ jobs:
     needs: do-build
     permissions: write-all
     uses: ./.github/workflows/buildChecks.yaml
+    
+  deploy-uat:
+    permissions: write-all
+    uses: ./.github/workflows/deployCdk.yaml
+    with:
+      environment: uat
