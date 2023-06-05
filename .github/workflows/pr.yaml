@@ -8,6 +8,10 @@ on:
       dockerfile:
         required: false
         type: string
+      environment:
+        required: false
+        default: ""
+        type: string
     secrets:
       envPAT:
         required: true
@@ -29,8 +33,8 @@ jobs:
     
   deploy-uat:
     needs: post-build-checks
-    if: github.ref == 'refs/heads/main'
+    if: inputs.environment != ''
     permissions: write-all
     uses: ./.github/workflows/deployCdk.yaml
     with:
-      environment: uat
+      environment: ${{ inputs.environment }}
