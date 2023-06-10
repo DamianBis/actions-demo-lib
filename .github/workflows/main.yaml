@@ -33,20 +33,17 @@ jobs:
     uses: ./.github/workflows/deployCdk.yaml
     with:
       environment: uat
-      waitToDeploy: false
 
   deploy-prelive:
     needs: post-build-checks
     permissions: write-all
     uses: ./.github/workflows/deployCdk.yaml
     with:
-      environment: pre-live
-      waitToDeploy: true
+      environment: prelive
       
   deploy-prod:
     needs: post-build-checks
     permissions: write-all
     uses: ./.github/workflows/deployCdk.yaml
     with:
-      environment: pre-live
-      waitToDeploy: true
+      environment: prod
