@@ -1,0 +1,52 @@
+
+on:
+  workflow_call:
+    inputs:
+      repo:
+        required: true
+        type: string
+      dockerfile:
+        required: false
+        type: string
+    secrets:
+      envPAT:
+        required: true
+
+jobs:
+
+  do-build:
+    permissions: write-all
+    uses: ./.github/workflows/buildImage.yaml
+    with:
+      repo: ${{ inputs.repo }}
+    secrets:
+      envPAT: ${{ secrets.envPAT }}
+
+  post-build-checks:
+    needs: do-build
+    permissions: write-all
+    uses: ./.github/workflows/buildChecks.yaml
+    
+  deploy-uat:
+    needs: post-build-checks
+    permissions: write-all
+    uses: ./.github/workflows/deployCdk.yaml
+    with:
+      environment: uat
+      waitToDeploy: false
+
+  deploy-prelive:
+    needs: post-build-checks
+    permissions: write-all
+    uses: ./.github/workflows/deployCdk.yaml
+    with:
+      environment: pre-live
+      waitToDeploy: true
+      
+  deploy-prod:
+    needs: post-build-checks
+    permissions: write-all
+    uses: ./.github/workflows/deployCdk.yaml
+    with:
+      environment: pre-live
+      waitToDeploy: true
