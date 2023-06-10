@@ -35,14 +35,14 @@ jobs:
       environment: uat
 
   deploy-prelive:
-    needs: post-build-checks
+    needs: deploy-uat
     permissions: write-all
     uses: ./.github/workflows/deployCdk.yaml
     with:
       environment: prelive
       
   deploy-prod:
-    needs: post-build-checks
+    needs: deploy-prelive
     permissions: write-all
     uses: ./.github/workflows/deployCdk.yaml
     with:
